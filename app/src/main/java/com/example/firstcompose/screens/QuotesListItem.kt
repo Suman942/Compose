@@ -16,12 +16,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ThumbUp
 
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,28 +38,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.firstcompose.models.Quotes
 
-@Preview
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuotesListItem() {
+fun QuotesListItem(data:Quotes,onClick: ()-> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(4.dp), modifier = Modifier
-            .padding(24.dp), colors = CardDefaults.cardColors(Color.White)
+            .padding(24.dp,16.dp), colors = CardDefaults.cardColors(Color.White), onClick = onClick
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
-                imageVector = Icons.Filled.ThumbUp,
+                imageVector = Icons.Filled.Star,
                 colorFilter = ColorFilter.tint(Color.White),
                 contentDescription = "Quotes",
                 alignment = Alignment.TopStart, modifier = Modifier
-                    .size(40.dp)
+                    .size(32.dp)
+                    .padding(4.dp)
                     .background(Color.Black)
 
             )
             Spacer(modifier = Modifier.padding(8.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Time is the most valuable thing a man can spend",
+                    text = data.title,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
@@ -71,7 +76,7 @@ fun QuotesListItem() {
                 )
 
                 Text(
-                    text = "Suman Shil",
+                    text = data.author,
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Thin,
                     modifier = Modifier.padding(top = 4.dp),
@@ -84,55 +89,3 @@ fun QuotesListItem() {
 
 }
 
-@Composable
-fun QuoteDetail() {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize(1f)
-            .background(
-                Brush.sweepGradient(
-                    colors = listOf(
-                        Color(0xFFffffff),
-                        Color(0xFFE3E3E3)
-                    )
-                )
-            )
-    ) {
-        Card(
-            elevation = CardDefaults.elevatedCardElevation(4.dp), colors = CardDefaults.cardColors(
-                Color.White
-            ),
-            modifier = Modifier.padding(32.dp)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .padding(16.dp,24.dp)
-
-            ) {
-
-                Image(
-                    imageVector = Icons.Filled.ThumbUp,
-                    colorFilter = ColorFilter.tint(Color.White),
-                    contentDescription = "Quotes",
-                    alignment = Alignment.TopStart, modifier = Modifier
-                        .size(80.dp)
-                        .background(Color.Black)
-
-                )
-
-                Text(
-                    text = "Time is the most valuable thing a man can spend",
-                    style = MaterialTheme.typography.titleSmall,
-                    modifier = Modifier.padding(0.dp,16.dp)
-                )
-
-                Text(
-                    text = "Suman Shil",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Normal)
-            }
-        }
-    }
-}
