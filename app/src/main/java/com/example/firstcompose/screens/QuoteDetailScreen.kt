@@ -1,11 +1,13 @@
 package com.example.firstcompose.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -22,10 +24,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.firstcompose.dataSource.DataManager
 import com.example.firstcompose.models.Quotes
 
 @Composable
 fun QuoteDetail(data:Quotes) {
+
+    BackHandler {
+        DataManager.switchPage(null)
+    }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -43,7 +50,8 @@ fun QuoteDetail(data:Quotes) {
             elevation = CardDefaults.elevatedCardElevation(4.dp), colors = CardDefaults.cardColors(
                 Color.White
             ),
-            modifier = Modifier.padding(32.dp)
+            modifier = Modifier
+                .padding(32.dp)
         ) {
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -57,7 +65,7 @@ fun QuoteDetail(data:Quotes) {
                     colorFilter = ColorFilter.tint(Color.White),
                     contentDescription = "Quotes",
                     alignment = Alignment.TopStart, modifier = Modifier
-                        .size(80.dp)
+                        .size(48.dp)
                         .background(Color.Black)
 
                 )

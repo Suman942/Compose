@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.firstcompose.models.Quotes
 
 @Composable
-fun QuoteListScreen(data:ArrayList<Quotes>,onClick:()-> Unit) {
+fun QuoteListScreen(data:ArrayList<Quotes>,onClick:(quote:Quotes)-> Unit) {
     Column {
         Text(text = "Quotes App",
             textAlign = TextAlign.Center,

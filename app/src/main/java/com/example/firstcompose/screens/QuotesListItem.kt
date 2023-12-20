@@ -3,6 +3,7 @@ package com.example.firstcompose.screens
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,20 +43,19 @@ import com.example.firstcompose.models.Quotes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuotesListItem(data:Quotes,onClick: ()-> Unit) {
+fun QuotesListItem(data: Quotes, onClick: (quote:Quotes) -> Unit) {
     Card(
-        elevation = CardDefaults.cardElevation(4.dp), modifier = Modifier
-            .padding(24.dp,16.dp), colors = CardDefaults.cardColors(Color.White), onClick = onClick
+        elevation = CardDefaults.cardElevation(4.dp),colors = CardDefaults.cardColors(Color.White),
+        modifier = Modifier
+            .padding(24.dp, 16.dp).clickable { onClick(data) }
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
                 imageVector = Icons.Filled.Star,
-                colorFilter = ColorFilter.tint(Color.White),
                 contentDescription = "Quotes",
                 alignment = Alignment.TopStart, modifier = Modifier
                     .size(32.dp)
                     .padding(4.dp)
-                    .background(Color.Black)
 
             )
             Spacer(modifier = Modifier.padding(8.dp))
